@@ -1,0 +1,119 @@
+<div class="row">
+    <div class="col-md-8">
+        <form #employeeSerachForm="ngForm"
+            (ngSubmit)="searchEmployee(employeeService.selectedEmployee.cedula,employeeSerachForm )"
+            class="form-control">
+            <input class="form-control mr-sm-2" name="cedula" [(ngModel)]="employeeService.selectedEmployee.cedula"
+                type="text" placeholder="Search by the identification card">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+                <i class="material-icons">search</i>
+            </button>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <form  #employeeForm="ngForm" (ngSubmit)="createEmployee(employeeForm)">
+                    <input type="hidden" name="_id" [(ngModel)]="employeeService.selectedEmployee._id">
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Enter your full name"
+                            [(ngModel)]="employeeService.selectedEmployee.name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="cedula" class="form-control"
+                            placeholder="Enter your identification card"
+                            [(ngModel)]="employeeService.selectedEmployee.cedula" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="position" class="form-control" placeholder="Enter your position"
+                            [(ngModel)]="employeeService.selectedEmployee.position" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="office" class="form-control" placeholder="Enter your office"
+                            [(ngModel)]="employeeService.selectedEmployee.office" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="number" name="salary" class="form-control" placeholder="Enter your salary"
+                            [(ngModel)]="employeeService.selectedEmployee.salary" required>
+                    </div>
+                    <button type="button" class=" btn btn-danger btn-sm mr-2" (click)="resetForm(employeeForm)">
+                        <i class="material-icons">backspace</i>
+                    </button>
+                    <button type="submit" class=" btn btn-success btn-sm mr-2">
+                        <i class="material-icons">check_box</i>
+
+                    </button>
+
+                </form>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Office</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Acctions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employeeC of employeeService.employee " scope="row">
+                    <td>{{employeeC.name}}</td>
+                    <td>{{employeeC.cedula}}</td>
+                    <td>{{employeeC.position}}</td>
+                    <td>{{employeeC.office}}</td>
+                    <td>{{employeeC.salary}}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" (click)="editEmployee(employeeC)">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employeeC._id!)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <table class="table table-striped table-dark">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Cedula</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Office</th>
+                    <th scope="col">Salary</th>
+                    <th scope="col">Acctions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let employee of employeeService.employees " scope="row">
+                    <td>{{employee.name}}</td>
+                    <td>{{employee.cedula}}</td>
+                    <td>{{employee.position}}</td>
+                    <td>{{employee.office}}</td>
+                    <td>{{employee.salary}}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" (click)="editEmployee(employee)">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button class="btn btn-danger btn-sm" (click)="deleteEmployee(employee._id!)">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
