@@ -1,22 +1,34 @@
 import { Employee } from './../../models/employee';
 import { EmployeeService } from './../../services/employee.service';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-employee',
   templateUrl: './employee.component.html',
   styleUrls: ['./employee.component.css']
 })
-export class EmployeeComponent {
-
-
-
+export class EmployeeComponent implements OnInit {
+  
+  name= new FormControl('');
+  cedula= new FormControl('');
+  position= new FormControl('');
+  office= new FormControl('');
+  salary= new FormControl('');
   constructor(public employeeService: EmployeeService) {
+    this.name.addValidators([Validators.required,Validators.minLength(3),Validators.maxLength(100)]);
+    this.cedula.addValidators([Validators.required]);
+    this.position.addValidators([Validators.required]);
+    this.office.addValidators([Validators.required]);
+    this.salary.addValidators([Validators.required]);
   }
-  ngOnInit(): void {
-    this.getEmployees()
+
+  ngOnInit() :void {
+    this.getEmployees();
+
   }
+
+
   resetForm(form: NgForm) {
     form.reset();
   }
@@ -75,4 +87,5 @@ export class EmployeeComponent {
       err => console.error(err)
     )
   }
+
 }
